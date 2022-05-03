@@ -6,15 +6,18 @@ export default function Footer(props) {
       <div className="container">
         <div className="row">
           <div className="col-md-4 col-xs-12">
+            {/*
             <div className="first">
-              <h4>Magic production </h4>
+              <h4>test </h4>
               <p> © 2020 - Tous droits réservés</p>
             </div>
+            */}
           </div>
 
           <div className="col-md-4 col-xs-12">
             <div className="second">
-              <h4> Navigation</h4>
+              <h6>© 2019 All rights reserved</h6>
+              {/*
               <ul>
                 <li>
                   <a onClick={() => props.data.handleClick("Accueil")}>
@@ -37,10 +40,12 @@ export default function Footer(props) {
                   </a>
                 </li>
               </ul>
+              */}
             </div>
           </div>
 
           <div className="col-md-4 col-xs-12">
+            {/*
             <div className="third">
               <h4> Contact</h4>
               <ul>
@@ -55,6 +60,7 @@ export default function Footer(props) {
                 </li>
               </ul>
             </div>
+            */}
           </div>
         </div>
       </div>

@@ -50,44 +50,14 @@ class App extends Component {
 
     return (
       <div className="cptApp">
-        <div className="sidebar">
-          <div className="left">
-            <a className="mail" href="mailto:magic61prod@hotmail.fr">
-              magic61prod@hotmail.fr
-            </a>
-            <p className="tel">06 83 61 98 96</p>
-          </div>
-        </div>
         <div className="layout">
-          <Menu data={{ handleClick: this.handleClick.bind(this) }} />
+          <div className="divMenu">
+            <Menu data={{ handleClick: this.handleClick.bind(this) }} />
+          </div>
           {renderPage()}
           <Footer data={{ handleClick: this.handleClick.bind(this) }} />
         </div>
-        <div className="sidebar">
-          <div className="right">
-            <a
-              className="instagram"
-              target="_blank"
-              href="https://www.instagram.com/magic.production_/"
-            >
-              Instagram
-            </a>
-            <a
-              className="facebook"
-              target="_blank"
-              href="https://www.facebook.com/magicproduction61"
-            >
-              facebook
-            </a>
-            <a
-              className="youtube"
-              target="_blank"
-              href="https://www.youtube.com/channel/UClG_js59C5B9Ymg90BnicCA"
-            >
-              youtube
-            </a>
-          </div>
-        </div>
+
         <Apropos />
       </div>
     );
