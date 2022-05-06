@@ -7,7 +7,6 @@ import Col from "react-bootstrap/Col";
 
 import Menu from "./containers/Menu";
 import Content from "./containers/Content";
-import Portfolio from "./containers/Portfolio";
 import Footer from "./containers/Footer";
 import Apropos from "./containers/Apropos";
 
@@ -38,14 +37,7 @@ class App extends Component {
             <Content />
           </div>
         );
-      } else if (this.state.currentPage == "Portfolio") {
-        //console.log('test2222222')
-        return (
-          <div>
-            <Portfolio />
-          </div>
-        );
-      }
+      } 
     };
 
     return (
