@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import SearchLocationInput from "./SearchLocationInput";
 import {
      Navbar,
      Container,
@@ -18,10 +19,10 @@ export default function Content() {
 
      return (
           <div className="cptContent">
-               <div className="imgAccueil"></div>
+               {/* <div className="imgAccueil"></div> */}
                <Container fluid>
-                    <Form className="ml-10 formAccueil">
-                         <Row className="justify-content-center">
+                    <Form className="formAccueil">
+                         <Row className="justify-content-center px-5 px-lg-0">
                               <Form.Group
                                    className="px-0 col-12 col-md-4 col-lg-3 "
                                    controlId="formBasicEmail"
@@ -31,6 +32,7 @@ export default function Content() {
                                         placeholder="Départ"
                                         className="Depart"
                                    />
+                                   <SearchLocationInput onChange={() => null} />
                               </Form.Group>
                               <Form.Group
                                    className="px-0 col-12 col-md-4 col-lg-3"
@@ -42,7 +44,7 @@ export default function Content() {
                                    />
                               </Form.Group>
                               <Form.Group
-                                   className="px-0 col-12 col-md-4 col-lg-1"
+                                   className="px-0 col-12 col-md-2 col-lg-2"
                                    controlId="formBasicDate"
                               >
                                    <DatePicker
@@ -55,9 +57,9 @@ export default function Content() {
                               <Button
                                    variant="primary"
                                    type="submit"
-                                   className="submitBtn col-4 col-md-2 col-lg-1"
+                                   className="submitBtn col-12 col-md-2 col-lg-2"
                               >
-                                   Submit
+                                   Rechercher
                               </Button>
                          </Row>
                     </Form>
