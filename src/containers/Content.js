@@ -2,17 +2,8 @@ import React, { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import SearchLocationInput from "./SearchLocationInput";
-import {
-     Navbar,
-     Container,
-     Nav,
-     NavDropdown,
-     Form,
-     FormControl,
-     Button,
-     Col,
-     Row
-} from "react-bootstrap";
+import MobileFullScreen from "./MobileFullScreen";
+import { Container, Form, Button, Row } from "react-bootstrap";
 
 export default function Content() {
      const [startDate, setStartDate] = useState(new Date());
@@ -27,20 +18,18 @@ export default function Content() {
                                    className="px-0 col-12 col-md-4 col-lg-3 "
                                    controlId="formBasicEmail"
                               >
-                                   <Form.Control
-                                        type="Depart"
-                                        placeholder="Départ"
-                                        className="Depart"
+                                   <SearchLocationInput
+                                        nom="Depart"
+                                        onChange={() => null}
                                    />
-                                   <SearchLocationInput onChange={() => null} />
                               </Form.Group>
                               <Form.Group
                                    className="px-0 col-12 col-md-4 col-lg-3"
                                    controlId="formBasicPassword"
                               >
-                                   <Form.Control
-                                        type="Destination"
-                                        placeholder="Destination"
+                                   <SearchLocationInput
+                                        nom="Destination"
+                                        onChange={() => null}
                                    />
                               </Form.Group>
                               <Form.Group

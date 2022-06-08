@@ -1,4 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
+import { Form } from "react-bootstrap";
+import MobileFullScreen from "./MobileFullScreen";
 
 let autoComplete;
 
@@ -42,7 +44,7 @@ async function handlePlaceSelect(updateQuery) {
      console.log(addressObject);
 }
 
-function SearchLocationInput() {
+function SearchLocationInput(props) {
      const [query, setQuery] = useState("");
      const autoCompleteRef = useRef(null);
 
@@ -54,11 +56,13 @@ function SearchLocationInput() {
      }, []);
 
      return (
-          <div className="search-location-input">
-               <input
+          <div className="search-location-input" onClick={MobileFullScreen}>
+               <Form.Control
                     ref={autoCompleteRef}
                     onChange={(event) => setQuery(event.target.value)}
-                    placeholder="Enter a City"
+                    type={props.nom}
+                    placeholder={props.nom}
+                    className={props.nom}
                     value={query}
                />
           </div>
