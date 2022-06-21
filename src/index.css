@@ -421,3 +421,8 @@ li a {
           border-radius: 0px;
      }
 }
+
+.linkClass {
+     padding-left: 0px;
+     padding-right: 0px;
+}
