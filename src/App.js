@@ -15,59 +15,52 @@ import {
      Switch,
      Route,
      Routes,
-     Link
+     Link,
+     useLocation
 } from "react-router-dom";
 
-class App extends Component {
-     constructor(props) {
-          super(props);
-          this.state = {
-               currentPage: "Accueil"
-          };
+export default function App() {
+     {
+          /* Variable qui va nous permettre de savoir si le header et le footer doivent être afficher */
+     }
+     let withHeaderFooter = 1;
+
+     {
+          /* On récupère la route actuelle pour determiner la valeur de withHeaderFooter */
+     }
+     let location = useLocation();
+
+     switch (location.pathname) {
+          case "/mobileFullScreen":
+               withHeaderFooter = 0;
+               break;
      }
 
-     render() {
-          /*
-        console.log('renderApp')
-        console.log('State '+this.state.currentPage)
-        */
-
-          return (
-               <Router>
-                    <div className="cptApp">
-                         <div className="layout">
-                              <div className="divMenu">
-                                   <Menu />
-                              </div>
-                              <Routes>
-                                   <Route
-                                        path="/about"
-                                        exact
-                                        element={<Apropos />}
-                                   />
-                                   <Route
-                                        path="/suivi"
-                                        exact
-                                        element={<Content />}
-                                   />
-                                   <Route
-                                        path="/expedition"
-                                        exact
-                                        element={<Content />}
-                                   />
-                                   <Route
-                                        path="/mobileFullScreen"
-                                        element={<MobileFullScreen />}
-                                   />
-                              </Routes>
-                              <Footer />
+     return (
+          <div className="cptApp">
+               <div className="layout">
+                    {withHeaderFooter == 1 && (
+                         <div className="divMenu">
+                              <Menu />
                          </div>
+                    )}
+                    <Routes>
+                         <Route path="/about" exact element={<Apropos />} />
+                         <Route path="/suivi" exact element={<Content />} />
+                         <Route
+                              path="/expedition"
+                              exact
+                              element={<Content />}
+                         />
+                         <Route
+                              path="/mobileFullScreen"
+                              element={<MobileFullScreen />}
+                         />
+                    </Routes>
+                    {withHeaderFooter == 1 && <Footer />}
+               </div>
 
-                         <Apropos />
-                    </div>
-               </Router>
-          );
-     }
+               <Apropos />
+          </div>
+     );
 }
-
-export default App;

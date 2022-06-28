@@ -72,24 +72,36 @@ export default function Content() {
                <Container fluid>
                     <Form className="formAccueil">
                          <Row className="justify-content-center px-5 px-lg-0">
-                              <Form.Group
-                                   className="px-0 col-12 col-md-4 col-lg-3 "
-                                   controlId="formBasicEmail"
+                              <ConditionalLink
+                                   to="/mobileFullScreen"
+                                   className="linkClass linkMobileFullScreen"
+                                   condition={isMobile}
                               >
-                                   <SearchLocationInput
-                                        nom="Depart"
-                                        onChange={() => null}
-                                   />
-                              </Form.Group>
-                              <Form.Group
-                                   className="px-0 col-12 col-md-4 col-lg-3"
-                                   controlId="formBasicPassword"
+                                   <Form.Group
+                                        className="px-0 col-12 col-md-4 col-lg-3 "
+                                        controlId="formBasicEmail"
+                                   >
+                                        <SearchLocationInput
+                                             nom="Depart"
+                                             onChange={() => null}
+                                        />
+                                   </Form.Group>
+                              </ConditionalLink>
+                              <ConditionalLink
+                                   to="/mobileFullScreen"
+                                   className="linkClass linkMobileFullScreen"
+                                   condition={isMobile}
                               >
-                                   <SearchLocationInput
-                                        nom="Destination"
-                                        onChange={() => null}
-                                   />
-                              </Form.Group>
+                                   <Form.Group
+                                        className="px-0 col-12 col-md-4 col-lg-3"
+                                        controlId="formBasicPassword"
+                                   >
+                                        <SearchLocationInput
+                                             nom="Destination"
+                                             onChange={() => null}
+                                        />
+                                   </Form.Group>
+                              </ConditionalLink>
                               <ConditionalLink
                                    to="/mobileFullScreen"
                                    className="linkClass linkMobileFullScreen"
