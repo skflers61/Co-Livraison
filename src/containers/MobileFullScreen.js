@@ -1,15 +1,15 @@
 import React, { useState, useRef } from "react";
-import { useLocation, Navigate } from "react-router-dom";
+import { useLocation, Navigate, Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
-import { Form, Row } from "react-bootstrap";
+import { faChevronRight, faXmark } from "@fortawesome/free-solid-svg-icons";
 
 function MobileFullScreen() {
   const [search, setSearch] = useState("");
+  const [PreviousComponent, setPreviousComponent] = useState("");
   const autoCompleteRef = useRef(null);
 
-  console.log("rrrrr");
   let location = useLocation();
+  console.log(location.state.PreviousComponent);
   if (!location.state) {
     return <Navigate to="/" replace />;
   }
@@ -26,6 +26,10 @@ function MobileFullScreen() {
         className="txtSearch"
         value={search}
       />
+
+      <Link to={"/" + location.state.PreviousComponent}>
+        <FontAwesomeIcon icon={faXmark} className="faXmark" onClick="" />
+      </Link>
     </div>
   );
 }

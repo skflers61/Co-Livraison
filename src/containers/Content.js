@@ -39,7 +39,11 @@ export default function Content() {
   }
   const ConditionalLink = ({ children, to, className, condition, nameLink }) =>
     !!condition && to ? (
-      <Link className={className} to={to} state={{ name: nameLink }}>
+      <Link
+        className={className}
+        to={to}
+        state={{ name: nameLink, PreviousComponent: "Content" }}
+      >
         {children}
       </Link>
     ) : (

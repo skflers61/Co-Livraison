@@ -438,9 +438,17 @@ li a {
   vertical-align: text-bottom;
   outline: none;
   box-shadow: none;
+  width: calc(100% - 100px);
 }
 input.txtSearch:focus-visible {
   border: 0px;
   outline: none;
   box-shadow: none;
+}
+
+.faXmark {
+  float: right;
+  padding: 5px 20px;
+  font-size: 16px;
+  vertical-align: text-bottom;
 }

@@ -10,14 +10,7 @@ import Content from "./containers/Content";
 import Footer from "./containers/Footer";
 import Apropos from "./containers/Apropos";
 import MobileFullScreen from "./containers/MobileFullScreen";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Routes,
-  Link,
-  useLocation
-} from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 
 export default function App() {
   {
