@@ -53,7 +53,7 @@ function SearchLocationInput(props) {
   }, []);
 
   return (
-    <div className="search-location-input" onClick={MobileFullScreen}>
+    <div className="search-location-input">
       <Form.Control
         ref={autoCompleteRef}
         onChange={(event) => setQuery(event.target.value)}

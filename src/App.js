@@ -45,6 +45,7 @@ export default function App() {
           </div>
         )}
         <Routes>
+          <Route path="/" exact element={<Content />} />
           <Route path="/about" exact element={<Apropos />} />
           <Route path="/suivi" exact element={<Content />} />
           <Route path="/expedition" exact element={<Content />} />
