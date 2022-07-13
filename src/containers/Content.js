@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useState } from "react";
+import React, { useLayoutEffect, useState, useCallback } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import SearchLocationInput from "./SearchLocationInput";
@@ -13,7 +13,7 @@ import {
   Link
 } from "react-router-dom";
 
-export default function Content() {
+export default function Content({ onHeaderfooterChange }) {
   {
     /* hook d'état permettant de gérer la valeur du input date*/
   }
@@ -30,6 +30,7 @@ export default function Content() {
   }
   const [size, setSize] = useState([0, 0]);
 
+  const [showMobileFullScreen, setShowMobileFullScreen] = useState(0, "");
   {
     /* Permet d'ajouter une route conditionnel
              Ex : Je veux que le clique sur le inpute date utilise la route qui renvoi vers le composant MobileFullScreen.
@@ -37,18 +38,24 @@ export default function Content() {
              La balise <link> sera ajouter uniquement si on est sur mobile
           */
   }
-  const ConditionalLink = ({ children, to, className, condition, nameLink }) =>
-    !!condition && to ? (
-      <Link
-        className={className}
-        to={to}
-        state={{ name: nameLink, PreviousComponent: "Content" }}
-      >
-        {children}
-      </Link>
-    ) : (
-      <>{children}</>
-    );
+
+  const handleHeaderfooterChange = useCallback(
+    (event) => {
+      onHeaderfooterChange(event.target.value);
+    },
+    [onHeaderfooterChange]
+  );
+
+  const ConditionalLink = (condition, nameLink) => {
+    console.log("aaaaaa");
+    if (!!condition) {
+      setShowMobileFullScreen([1, nameLink]);
+
+      console.log("testtttttttt");
+    } else {
+      null;
+    }
+  };
 
   {
     /* isMobile = true si la taille de l'écran ne dépasse pas 760px
@@ -61,6 +68,7 @@ export default function Content() {
           La modification du state aura pour effet de re-render le composant.
           */
   }
+
   useLayoutEffect(() => {
     function updateSize() {
       setSize([window.innerWidth, window.innerHeight]);
@@ -72,53 +80,36 @@ export default function Content() {
 
   return (
     <div className="cptContent">
+      {showMobileFullScreen[0] == 1 ? (
+        <MobileFullScreen name={showMobileFullScreen[1]} />
+      ) : null}
       {/* <div className="imgAccueil"></div> */}
       <Container fluid>
         <Form className="formAccueil">
           <Row className="justify-content-center px-5 px-lg-0">
-            <ConditionalLink
-              to="/mobileFullScreen"
-              className="linkClass linkMobileFullScreen"
-              nameLink="Depart"
-              condition={isMobile}
+            <Form.Group
+              className="px-0 col-12 col-md-4 col-lg-3 "
+              controlId="formBasicEmail"
+              onChange={handleHeaderfooterChange}
             >
-              <Form.Group
-                className="px-0 col-12 col-md-4 col-lg-3 "
-                controlId="formBasicEmail"
-              >
-                <SearchLocationInput nom="Depart" onChange={() => null} />
-              </Form.Group>
-            </ConditionalLink>
-            <ConditionalLink
-              to="/mobileFullScreen"
-              className="linkClass linkMobileFullScreen"
-              nameLink="Destination"
-              condition={isMobile}
+              <SearchLocationInput nom="Depart" onChange={() => null} />
+            </Form.Group>
+            <Form.Group
+              className="px-0 col-12 col-md-4 col-lg-3"
+              controlId="formBasicPassword"
             >
-              <Form.Group
-                className="px-0 col-12 col-md-4 col-lg-3"
-                controlId="formBasicPassword"
-              >
-                <SearchLocationInput nom="Destination" onChange={() => null} />
-              </Form.Group>
-            </ConditionalLink>
-            <ConditionalLink
-              to="/mobileFullScreen"
-              className="linkClass linkMobileFullScreen"
-              nameLink="startDate"
-              condition={isMobile}
+              <SearchLocationInput nom="Destination" onChange={() => null} />
+            </Form.Group>
+            <Form.Group
+              className="px-0 col-12 col-md-2 col-lg-2"
+              controlId="formBasicDate"
             >
-              <Form.Group
-                className="px-0 col-12 col-md-2 col-lg-2"
-                controlId="formBasicDate"
-              >
-                <DatePicker
-                  className="inputDate"
-                  selected={startDate}
-                  onChange={(date) => setStartDate(date)}
-                />
-              </Form.Group>
-            </ConditionalLink>
+              <DatePicker
+                className="inputDate"
+                selected={startDate}
+                onChange={(date) => setStartDate(date)}
+              />
+            </Form.Group>
 
             <Button
               variant="primary"

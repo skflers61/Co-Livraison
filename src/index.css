@@ -452,3 +452,10 @@ input.txtSearch:focus-visible {
   font-size: 16px;
   vertical-align: text-bottom;
 }
+
+.DpNone {
+  display: none !important;
+}
+.DpBlock {
+  display: block !important;
+}

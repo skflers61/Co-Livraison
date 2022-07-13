@@ -3,16 +3,10 @@ import { useLocation, Navigate, Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronRight, faXmark } from "@fortawesome/free-solid-svg-icons";
 
-function MobileFullScreen() {
+function MobileFullScreen(name) {
   const [search, setSearch] = useState("");
   const [PreviousComponent, setPreviousComponent] = useState("");
   const autoCompleteRef = useRef(null);
-
-  let location = useLocation();
-  console.log(location.state.PreviousComponent);
-  if (!location.state) {
-    return <Navigate to="/" replace />;
-  }
 
   return (
     <div className="cptMobileFullScreen">
@@ -21,15 +15,13 @@ function MobileFullScreen() {
       <input
         ref={autoCompleteRef}
         onChange={(event) => setSearch(event.target.value)}
-        type={location.state.name}
-        placeholder={location.state.name}
+        type={name}
+        placeholder={name}
         className="txtSearch"
         value={search}
       />
 
-      <Link to={"/" + location.state.PreviousComponent}>
-        <FontAwesomeIcon icon={faXmark} className="faXmark" onClick="" />
-      </Link>
+      <FontAwesomeIcon icon={faXmark} className="faXmark" onClick="" />
     </div>
   );
 }

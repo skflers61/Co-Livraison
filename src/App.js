@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 
 /*
 import Row from "react-bootstrap/Row";
@@ -14,20 +14,11 @@ import { Route, Routes, useLocation } from "react-router-dom";
 
 export default function App() {
   {
-    /* Variable qui va nous permettre de savoir si le header et le footer doivent être afficher */
-  }
-  let withHeaderFooter = 1;
-
-  {
     /* On récupère la route actuelle pour determiner la valeur de withHeaderFooter */
   }
   let location = useLocation();
 
-  switch (location.pathname) {
-    case "/mobileFullScreen":
-      withHeaderFooter = 0;
-      break;
-  }
+  const [withHeaderFooter, setWithHeaderFooter] = useState(1);
 
   return (
     <div className="cptApp">
@@ -40,7 +31,16 @@ export default function App() {
         <Routes>
           <Route path="/" exact element={<Content />} />
           <Route path="/about" exact element={<Apropos />} />
-          <Route path="/suivi" exact element={<Content />} />
+          <Route
+            path="/suivi"
+            exact
+            element={
+              <Content
+                Headerfooter={withHeaderFooter}
+                onHeaderfooterChange={setWithHeaderFooter}
+              />
+            }
+          />
           <Route path="/expedition" exact element={<Content />} />
           <Route path="/mobileFullScreen" element={<MobileFullScreen />} />
         </Routes>
