@@ -11,6 +11,7 @@ import Footer from "./containers/Footer";
 import Apropos from "./containers/Apropos";
 import MobileFullScreen from "./containers/MobileFullScreen";
 import { Route, Routes, useLocation } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 export default function App() {
   {
@@ -18,7 +19,7 @@ export default function App() {
   }
   let location = useLocation();
 
-  const [withHeaderFooter, setWithHeaderFooter] = useState(1);
+  const withHeaderFooter = useSelector((state) => console.log(state));
 
   return (
     <div className="cptApp">
