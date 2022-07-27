@@ -11,7 +11,7 @@ import Footer from "./containers/Footer";
 import Apropos from "./containers/Apropos";
 import MobileFullScreen from "./containers/MobileFullScreen";
 import { Route, Routes, useLocation } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function App() {
   {
@@ -19,12 +19,13 @@ export default function App() {
   }
   let location = useLocation();
 
-  const withHeaderFooter = useSelector((state) => console.log(state));
+  const tasks = useSelector((state) => state.vue);
+  const dispatch = useDispatch();
 
   return (
     <div className="cptApp">
       <div className="layout">
-        {withHeaderFooter == 1 && (
+        {tasks.withHeaderFooter === true && (
           <div className="divMenu">
             <Menu />
           </div>
@@ -32,20 +33,11 @@ export default function App() {
         <Routes>
           <Route path="/" exact element={<Content />} />
           <Route path="/about" exact element={<Apropos />} />
-          <Route
-            path="/suivi"
-            exact
-            element={
-              <Content
-                Headerfooter={withHeaderFooter}
-                onHeaderfooterChange={setWithHeaderFooter}
-              />
-            }
-          />
+          <Route path="/suivi" exact element={<Content />} />
           <Route path="/expedition" exact element={<Content />} />
           <Route path="/mobileFullScreen" element={<MobileFullScreen />} />
         </Routes>
-        {withHeaderFooter == 1 && <Footer />}
+        {tasks.withHeaderFooter === true && <Footer />}
       </div>
 
       <Apropos />

@@ -12,8 +12,9 @@ import {
   Routes,
   Link
 } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
-export default function Content({ onHeaderfooterChange }) {
+export default function Content() {
   {
     /* hook d'état permettant de gérer la valeur du input date*/
   }
@@ -30,30 +31,19 @@ export default function Content({ onHeaderfooterChange }) {
   }
   const [size, setSize] = useState([0, 0]);
 
-  const [showMobileFullScreen, setShowMobileFullScreen] = useState(0, "");
-  {
-    /* Permet d'ajouter une route conditionnel
-             Ex : Je veux que le clique sur le inpute date utilise la route qui renvoi vers le composant MobileFullScreen.
-             Il faut appeler : <ConditionalLink to="/mobileFullScreen"condition={isMobile}>
-             La balise <link> sera ajouter uniquement si on est sur mobile
-          */
-  }
+  const tasks = useSelector((state) => state.vue);
+  const dispatch = useDispatch();
 
-  const handleHeaderfooterChange = useCallback(
-    (event) => {
-      onHeaderfooterChange(event.target.value);
-    },
-    [onHeaderfooterChange]
-  );
-
-  const ConditionalLink = (condition, nameLink) => {
-    console.log("aaaaaa");
-    if (!!condition) {
-      setShowMobileFullScreen([1, nameLink]);
-
-      console.log("testtttttttt");
-    } else {
-      null;
+  const handleHeaderfooterChange = (name) => {
+    console.log(name);
+    if (!!isMobile) {
+      dispatch({
+        type: "vue/toggleWithHeaderFooter"
+      });
+      dispatch({
+        type: "vue/changeMobileFullScreenName",
+        payload: name
+      });
     }
   };
 
@@ -80,29 +70,38 @@ export default function Content({ onHeaderfooterChange }) {
 
   return (
     <div className="cptContent">
-      {showMobileFullScreen[0] == 1 ? (
-        <MobileFullScreen name={showMobileFullScreen[1]} />
-      ) : null}
+      {tasks.withHeaderFooter === false ? <MobileFullScreen /> : null}
       {/* <div className="imgAccueil"></div> */}
-      <Container fluid>
+      <Container
+        fluid
+        className={tasks.withHeaderFooter === false ? "DpNone" : ""}
+      >
         <Form className="formAccueil">
           <Row className="justify-content-center px-5 px-lg-0">
             <Form.Group
               className="px-0 col-12 col-md-4 col-lg-3 "
               controlId="formBasicEmail"
-              onChange={handleHeaderfooterChange}
+              onClick={() => {
+                handleHeaderfooterChange("Départ");
+              }}
             >
               <SearchLocationInput nom="Depart" onChange={() => null} />
             </Form.Group>
             <Form.Group
               className="px-0 col-12 col-md-4 col-lg-3"
               controlId="formBasicPassword"
+              onClick={() => {
+                handleHeaderfooterChange("Destination");
+              }}
             >
               <SearchLocationInput nom="Destination" onChange={() => null} />
             </Form.Group>
             <Form.Group
               className="px-0 col-12 col-md-2 col-lg-2"
               controlId="formBasicDate"
+              onClick={() => {
+                handleHeaderfooterChange("Date");
+              }}
             >
               <DatePicker
                 className="inputDate"
