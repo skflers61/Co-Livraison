@@ -27,15 +27,43 @@ const vueSlice = createSlice({
     },
     deleteTask: (state, action) => {
       state = state.tab.find((t) => t.id !== action.payload);
+      return state;
     },
     toggleWithHeaderFooter: (state, action) => {
       state.withHeaderFooter = !state.withHeaderFooter;
+      return state;
     },
     changeMobileFullScreenName: (state, action) => {
       state.MobileFullScreenName = action.payload;
+      return state;
     }
   }
 });
+
+/* action creator redux
+
+Les "actions creator" sont des fonctions qui aident à créer des objets action
+ex : pour appeler un reducer redux, normalement on écrit : 
+disptach({
+  type:"vue/changeMobileFullScreenName",
+  payload: 'monName'
+})
+
+Pour éviter d'écrire cela à chaque appel du reducer, Redux a mis à disposition les "action creator"
+1) on exporte ces actions creator comme ceci:
+export const {
+  toggleWithHeaderFooter,
+  changeMobileFullScreenName
+} = vueSlice.actions;
+
+2) l'utilisation dans dispatch devient plus simple : 
+dispatch(changeMobileFullScreenName('monName'));
+
+*/
+export const {
+  toggleWithHeaderFooter,
+  changeMobileFullScreenName
+} = vueSlice.actions;
 
 export const store = configureStore({
   reducer: {

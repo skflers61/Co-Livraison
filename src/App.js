@@ -20,7 +20,6 @@ export default function App() {
   let location = useLocation();
 
   const tasks = useSelector((state) => state.vue);
-  const dispatch = useDispatch();
 
   return (
     <div className="cptApp">

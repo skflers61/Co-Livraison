@@ -3,6 +3,7 @@ import { useLocation, Navigate, Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronRight, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch, useSelector } from "react-redux";
+import { toggleWithHeaderFooter } from "../redux-slices/vue";
 
 export default function MobileFullScreen(name) {
   const [search, setSearch] = useState("");
@@ -11,9 +12,7 @@ export default function MobileFullScreen(name) {
   const dispatch = useDispatch();
   const tasks = useSelector((state) => state.vue);
   const handleClose = () => {
-    dispatch({
-      type: "vue/toggleWithHeaderFooter"
-    });
+    dispatch(toggleWithHeaderFooter());
   };
 
   return (

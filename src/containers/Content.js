@@ -13,6 +13,10 @@ import {
   Link
 } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import {
+  changeMobileFullScreenName,
+  toggleWithHeaderFooter
+} from "../redux-slices/vue";
 
 export default function Content() {
   {
@@ -37,13 +41,8 @@ export default function Content() {
   const handleHeaderfooterChange = (name) => {
     console.log(name);
     if (!!isMobile) {
-      dispatch({
-        type: "vue/toggleWithHeaderFooter"
-      });
-      dispatch({
-        type: "vue/changeMobileFullScreenName",
-        payload: name
-      });
+      dispatch(toggleWithHeaderFooter());
+      dispatch(changeMobileFullScreenName(name));
     }
   };
 
