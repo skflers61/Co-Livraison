@@ -1,17 +1,21 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import { createRoot } from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import { BrowserRouter as Router } from "react-router-dom";
-
 import { store } from "./redux-slices/vue";
 import { Provider } from "react-redux";
 
-ReactDOM.render(
+import TrajetsListe from "./containers/Recherche/TrajetsListe";
+
+const container = document.getElementById("contenu");
+const root = createRoot(container);
+
+// Le provider permet de se connecter à l'état global gérer par Redux
+root.render(
   <Provider store={store}>
     <Router>
-      <App />
+      <TrajetsListe />
     </Router>
-  </Provider>,
-  document.getElementById("contenu")
+  </Provider>
 );

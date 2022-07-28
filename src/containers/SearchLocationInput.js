@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Form } from "react-bootstrap";
-import MobileFullScreen from "./MobileFullScreen";
 
 let autoComplete;
 
