@@ -1,6 +1,6 @@
 import { configureStore, createSlice } from "@reduxjs/toolkit";
 
-const vueSlice = createSlice({
+export const vueSlice = createSlice({
   name: "vue",
   initialState: {
     tab: [
@@ -64,9 +64,3 @@ export const {
   toggleWithHeaderFooter,
   changeMobileFullScreenName
 } = vueSlice.actions;
-
-export const store = configureStore({
-  reducer: {
-    vue: vueSlice.reducer
-  }
-});

@@ -459,3 +459,22 @@ input.txtSearch:focus-visible {
 .DpBlock {
   display: block !important;
 }
+
+.cptTrajet {
+  display: flex;
+  justify-content: left;
+  border: 3px rgb(112, 112, 112) solid;
+  margin: 15px;
+  border-radius: 10px;
+}
+.infosTrajet {
+  background-color: #a1c293;
+  padding: 10px;
+  width: 70%;
+  border-radius: 10px 0px 0px 10px;
+}
+.conducteur {
+  background-color: #e48e8e;
+  padding: 10px;
+  width: 30%;
+}
