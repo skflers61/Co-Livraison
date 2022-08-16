@@ -18,17 +18,18 @@ export default function Trajet(props) {
   return (
     <div className="cptTrajet">
       <div className="infosTrajet">
-        <div>
+        <div className="infosTrajetLigne1">
           <div className="heureDepart">{monTrajet.heureDepart}</div>
           <div className="depart">{monTrajet.depart}</div>
-          <div className="prix">{monTrajet.prix}</div>
+          <div className="prix">{monTrajet.prix} €</div>
         </div>
-        <div>
-          <div className="duree">{monTrajet.duree}</div>
-        </div>
-        <div>
+        <div className="infosTrajetLigne2">
           <div className="heureArrive">{monTrajet.heureArrive}</div>
           <div className="destination">{monTrajet.destination}</div>
+        </div>
+        <div className="infosTrajetLigne3">
+          <div className="dureeTxt">Durée :</div>
+          <div className="duree">{monTrajet.duree}</div>
         </div>
       </div>
       <div className="conducteur">{monTrajet.conducteur}</div>

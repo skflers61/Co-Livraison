@@ -463,18 +463,37 @@ input.txtSearch:focus-visible {
 .cptTrajet {
   display: flex;
   justify-content: left;
-  border: 3px rgb(112, 112, 112) solid;
-  margin: 15px;
+  border: 3px rgb(146, 146, 146) solid;
+  margin: 15px 15px;
   border-radius: 10px;
+  font-weight: bold;
+  box-shadow: 0px 0px 5px rgb(100, 100, 100);
 }
 .infosTrajet {
-  background-color: #a1c293;
   padding: 10px;
   width: 70%;
   border-radius: 10px 0px 0px 10px;
+  border-right: 1px rgb(199, 199, 199) solid;
 }
 .conducteur {
-  background-color: #e48e8e;
   padding: 10px;
   width: 30%;
+}
+
+.cptTrajet .infosTrajetLigne1,
+.cptTrajet .infosTrajetLigne2,
+.cptTrajet .infosTrajetLigne3 {
+  display: flex;
+  width: 100%;
+}
+
+.cptTrajet .heureDepart,
+.cptTrajet .prix,
+.cptTrajet .heureArrive,
+.cptTrajet .dureeTxt {
+  width: 70px;
+}
+.cptTrajet .depart,
+.cptTrajet .destination {
+  width: calc(100% - 140px);
 }

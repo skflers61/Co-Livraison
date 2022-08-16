@@ -7,6 +7,7 @@ import { store } from "./redux-slices/store";
 import { Provider } from "react-redux";
 
 import TrajetsListe from "./containers/Recherche/TrajetsListe";
+import ResultatRecherche from "./containers/Recherche/ResultatRecherche";
 
 const container = document.getElementById("contenu");
 const root = createRoot(container);
@@ -15,7 +16,7 @@ const root = createRoot(container);
 root.render(
   <Provider store={store}>
     <Router>
-      <TrajetsListe />
+      <ResultatRecherche />
     </Router>
   </Provider>
 );
