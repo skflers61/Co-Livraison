@@ -428,29 +428,28 @@ li a {
 }
 
 .faChevronRight {
-  padding: 5px 20px;
+  padding: 0px 20px;
   font-size: 16px;
   display: inline-block;
 }
 
-.txtSearch {
+.MobiletxtSearch {
   border: 0px;
-  vertical-align: text-bottom;
+  vertical-align: baseline;
   outline: none;
   box-shadow: none;
   width: calc(100% - 100px);
 }
-input.txtSearch:focus-visible {
+input.MobiletxtSearch:focus-visible {
   border: 0px;
   outline: none;
   box-shadow: none;
 }
 
 .faXmark {
-  float: right;
   padding: 5px 20px;
   font-size: 16px;
-  vertical-align: text-bottom;
+  vertical-align: middle;
 }
 
 .DpNone {

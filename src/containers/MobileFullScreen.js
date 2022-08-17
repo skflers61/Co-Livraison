@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronRight, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleWithHeaderFooter } from "../redux-slices/vue";
+import SearchLocationInput from "./SearchLocationInput";
 
 export default function MobileFullScreen(name) {
   const [search, setSearch] = useState("");
@@ -19,13 +20,14 @@ export default function MobileFullScreen(name) {
     <div className="cptMobileFullScreen">
       <FontAwesomeIcon icon={faChevronRight} className="faChevronRight" />
 
-      <input
+      <SearchLocationInput
         ref={autoCompleteRef}
         onChange={(event) => setSearch(event.target.value)}
         type="text"
         placeholder={tasks.MobileFullScreenName}
-        className="txtSearch"
+        className="MobiletxtSearch"
         value={search}
+        nom="Depart"
       />
 
       <FontAwesomeIcon

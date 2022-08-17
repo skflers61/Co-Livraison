@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useState } from "react";
+import React, { useLayoutEffect, useState, useRef } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import SearchLocationInput from "./SearchLocationInput";
@@ -14,6 +14,8 @@ import {
 export default function Content() {
   /* hook d'état permettant de gérer la valeur du input date*/
   const [startDate, setStartDate] = useState(new Date());
+
+  const [search, setSearch] = useState("");
 
   /* hook d'état permettant de gérer la taille de l'écran
         Cette state sera utiliser pour re-render automatiquement le composant dans le cas où la taille de l'écran change.
@@ -69,7 +71,12 @@ export default function Content() {
                 handleHeaderfooterChange("Départ");
               }}
             >
-              <SearchLocationInput nom="Depart" onChange={() => null} />
+              <SearchLocationInput
+                nom="Depart"
+                onChange={() => null}
+                placeholder={tasks.MobileFullScreenName}
+                className="txtSearch"
+              />
             </Form.Group>
             <Form.Group
               className="px-0 col-12 col-md-4 col-lg-3"
@@ -78,7 +85,12 @@ export default function Content() {
                 handleHeaderfooterChange("Destination");
               }}
             >
-              <SearchLocationInput nom="Destination" onChange={() => null} />
+              <SearchLocationInput
+                nom="Destination"
+                onChange={() => null}
+                placeholder={tasks.MobileFullScreenName}
+                className="txtSearch"
+              />
             </Form.Group>
             <Form.Group
               className="px-0 col-12 col-md-2 col-lg-2"
