@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Form } from "react-bootstrap";
 
-let autoCompletes = new Array();
+let autoCompleteDepart;
+let autoCompleteDestination;
 
 const loadScript = (url, callback) => {
   let script = document.createElement("script");
@@ -34,30 +35,55 @@ const loadScript = (url, callback) => {
 };
 
 // handle when the script is loaded we will assign autoCompleteRef with google maps place autocomplete
-function handleScriptLoad(updateQuery, autoCompleteRef) {
-  var acInputs = document.getElementsByClassName("txtSearch");
-  for (var i = 0; i < acInputs.length; i++) {
-    autoCompletes[i] = new window.google.maps.places.Autocomplete(acInputs[i], {
-      types: ["(cities)"],
-      componentRestrictions: { country: "fr" }
-    });
-    autoCompletes[i].inputId = acInputs[i].id;
-    autoCompletes[i].setFields(["address_components", "formatted_address"]);
+function handleScriptLoad(updateQuery, autoCompleteRef, props) {
+  if (props.nom == "Depart") {
+    autoCompleteDepart = new window.google.maps.places.Autocomplete(
+      document.getElementById("formBasicEmail"),
+      {
+        types: ["(cities)"],
+        componentRestrictions: { country: "fr" }
+      }
+    );
+    autoCompleteDepart.inputRef = autoCompleteRef;
+    autoCompleteDepart.setFields(["address_components", "formatted_address"]);
 
     // add a listener to handle when the place is selected
-    autoCompletes[i].addListener(
+    google.maps.event.addListener(
+      autoCompleteDepart,
       "place_changed",
-      handlePlaceSelect(updateQuery, this)
+      function () {
+        const addressObject = autoCompleteDepart.getPlace(); // get place from google api
+        const query = addressObject.formatted_address;
+        updateQuery(query);
+        console.log(addressObject);
+      }
+    );
+  } else if (props.nom == "Destination") {
+    autoCompleteDestination = new window.google.maps.places.Autocomplete(
+      document.getElementById("formBasicPassword"),
+      {
+        types: ["(cities)"],
+        componentRestrictions: { country: "fr" }
+      }
+    );
+    autoCompleteDestination.inputRef = autoCompleteRef;
+    autoCompleteDestination.setFields([
+      "address_components",
+      "formatted_address"
+    ]);
+
+    // add a listener to handle when the place is selected
+    google.maps.event.addListener(
+      autoCompleteDestination,
+      "place_changed",
+      function () {
+        const addressObject = autoCompleteDestination.getPlace(); // get place from google api
+        const query = addressObject.formatted_address;
+        updateQuery(query);
+        console.log(addressObject);
+      }
     );
   }
-}
-
-async function handlePlaceSelect(updateQuery, event) {
-  console.log(event);
-  const addressObject = autoCompletes[0].getPlace();
-  const query = addressObject.formatted_address;
-  updateQuery(query);
-  console.log(addressObject);
 }
 
 function SearchLocationInput(props) {
@@ -66,13 +92,12 @@ function SearchLocationInput(props) {
   useEffect(() => {
     loadScript(
       `https://maps.googleapis.com/maps/api/js?key=AIzaSyDa7pQIToRYk5hyxa5hBHuSCZRbxSP6yVg&libraries=places`,
-      () => handleScriptLoad(setQuery, autoCompleteRef)
+      () => handleScriptLoad(setQuery, autoCompleteRef, props)
     );
   }, []);
 
   return (
     <Form.Control
-      ref={autoCompleteRef}
       onChange={(event) => setQuery(event.target.value)}
       placeholder={props.placeholder}
       className={props.className}
