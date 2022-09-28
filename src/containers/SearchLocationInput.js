@@ -1,10 +1,12 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Form } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
+import { changeLieuDepart, changeLieuDestination } from "../redux-slices/vue";
 
 let autoCompleteDepart;
 let autoCompleteDestination;
 
-const loadScript = (url, callback) => {
+let loadScript = (url, callback) => {
   let script = document.createElement("script");
   script.type = "text/javascript";
 
@@ -35,10 +37,10 @@ const loadScript = (url, callback) => {
 };
 
 // handle when the script is loaded we will assign autoCompleteRef with google maps place autocomplete
-function handleScriptLoad(updateQuery, autoCompleteRef, props) {
+function handleScriptLoad(updateQuery, autoCompleteRef, props, dispatch) {
   if (props.nom == "Depart") {
     autoCompleteDepart = new window.google.maps.places.Autocomplete(
-      document.getElementById("formBasicEmail"),
+      document.getElementById("formDepartId"),
       {
         types: ["(cities)"],
         componentRestrictions: { country: "fr" }
@@ -56,11 +58,12 @@ function handleScriptLoad(updateQuery, autoCompleteRef, props) {
         const query = addressObject.formatted_address;
         updateQuery(query);
         console.log(addressObject);
+        dispatch(changeLieuDepart(addressObject.formatted_address));
       }
     );
   } else if (props.nom == "Destination") {
     autoCompleteDestination = new window.google.maps.places.Autocomplete(
-      document.getElementById("formBasicPassword"),
+      document.getElementById("formDestinationId"),
       {
         types: ["(cities)"],
         componentRestrictions: { country: "fr" }
@@ -81,18 +84,20 @@ function handleScriptLoad(updateQuery, autoCompleteRef, props) {
         const query = addressObject.formatted_address;
         updateQuery(query);
         console.log(addressObject);
+        dispatch(changeLieuDestination(addressObject.formatted_address));
       }
     );
   }
 }
 
 function SearchLocationInput(props) {
-  const [query, setQuery] = useState("");
+  const [query, setQuery] = useState(props.value);
   const autoCompleteRef = useRef(null);
+  const dispatch = useDispatch();
   useEffect(() => {
     loadScript(
       `https://maps.googleapis.com/maps/api/js?key=AIzaSyDa7pQIToRYk5hyxa5hBHuSCZRbxSP6yVg&libraries=places`,
-      () => handleScriptLoad(setQuery, autoCompleteRef, props)
+      () => handleScriptLoad(setQuery, autoCompleteRef, props, dispatch)
     );
   }, []);
 

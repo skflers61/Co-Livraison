@@ -8,7 +8,9 @@ export const vueSlice = createSlice({
       { id: 2, text: "Ménage !", done: true }
     ],
     withHeaderFooter: true,
-    MobileFullScreenName: ""
+    MobileFullScreenName: "",
+    LieuDepart: "",
+    LieuDestination: ""
   },
 
   reducers: {
@@ -36,6 +38,16 @@ export const vueSlice = createSlice({
     changeMobileFullScreenName: (state, action) => {
       state.MobileFullScreenName = action.payload;
       return state;
+    },
+
+    changeLieuDepart: (state, action) => {
+      state.LieuDepart = action.payload;
+      return state;
+    },
+
+    changeLieuDestination: (state, action) => {
+      state.LieuDestination = action.payload;
+      return state;
     }
   }
 });
@@ -62,5 +74,7 @@ dispatch(changeMobileFullScreenName('monName'));
 */
 export const {
   toggleWithHeaderFooter,
-  changeMobileFullScreenName
+  changeMobileFullScreenName,
+  changeLieuDepart,
+  changeLieuDestination
 } = vueSlice.actions;
