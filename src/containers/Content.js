@@ -15,8 +15,7 @@ export default function Content() {
   /* hook d'état permettant de gérer la valeur du input date*/
   const [startDate, setStartDate] = useState(new Date());
 
-  const [search, setSearch] = useState("");
-
+  /* hook d'état qui contient l'id du champ input autocomplete qui vient d'être cliqué */
   const [autocompletCity, setAutocompletCity] = useState("");
 
   /* hook d'état permettant de gérer la taille de l'écran
@@ -28,29 +27,53 @@ export default function Content() {
         */
   const [size, setSize] = useState([0, 0]);
 
+  //On récupère nos données Redux
   const tasks = useSelector((state) => state.vue);
+
+  //On créé un raccourci pour la fonction dispatch
   const dispatch = useDispatch();
 
+  /* Fonction appelée quand l'utilisateur clique sur un champ de recherche.
+   */
   const handleHeaderfooterChange = (name, id) => {
     console.log(name);
+
+    //On verifie si on est en mode mobile ou pc
     if (!!isMobile) {
+      //on est sur mobile, on met à jour les données redux
       dispatch(toggleWithHeaderFooter());
       dispatch(changeMobileFullScreenName(name));
     } else {
+      //on est sur pc, on met à jour le state autocompletCity
       handleAutocompleteClick(name, id);
     }
   };
 
+  /* Fonction qui permet de mettre à jour le state autocompletCity lors du clique sur un input autocomplete */
   const handleAutocompleteClick = (name, id) => {
     console.log("testtttttttt");
+
+    /* on met à jour le state afin de rerender les composants autocompletes.
+    Le but étant de mettre uniquement le input qui vient d'être cliqué en autocomplete (composant SearchLocationInput) 
+    L'élément cliqué devient un SearchLocationInput et l'autre un input normal.
+    J'ai dû faire ce fonctionnement car je n'arrivais pas à mettre 2 SearchLocationInput dans la même page.
+    Google afficher un seul des deux input en autocomplete.
+    */
     setAutocompletCity(id);
   };
 
+  /* Permet de redonner le focus à l'élément cliqué.
+
+  Contexte : je viens de cliqué sur un input, elle se transforme en autocomplete google,
+  mais l'utilisateur est obligé de recliquer sur le input car le focus et perdu.
+  Avec ce useEffect, plus besoin de recliquer sur le input.
+  */
   useEffect(() => {
     if (autocompletCity !== "") {
       document.getElementById(autocompletCity).focus();
     }
   });
+
   /* isMobile = true si la taille de l'écran ne dépasse pas 760px
    */
   const isMobile = useMediaQuery({ query: `(max-width: 760px)` });
@@ -85,22 +108,29 @@ export default function Content() {
                 handleHeaderfooterChange("Départ", "formDepartId");
               }}
             >
-              {autocompletCity === "formDepartId" ? (
-                <SearchLocationInput
-                  nom="Depart"
-                  onChange={() => null}
-                  placeholder={tasks.MobileFullScreenName}
-                  className="txtSearch"
-                  value={tasks.LieuDepart}
-                />
-              ) : (
-                <Form.Control
-                  nom="Depart"
-                  placeholder={tasks.MobileFullScreenName}
-                  className="txtSearch"
-                  value={tasks.LieuDepart}
-                />
-              )}
+              {
+                /* Si autocompletCity est différent de null, cela veut dire que l'utilisateur à cliqué sur un input autocomplete.
+                Le but étant de mettre uniquement le input qui vient d'être cliqué en autocomplete (composant SearchLocationInput) 
+                L'élément cliqué devient un SearchLocationInput et l'autre un input normal.
+                */
+
+                autocompletCity === "formDepartId" ? (
+                  <SearchLocationInput
+                    nom="Depart"
+                    onChange={() => null}
+                    placeholder={tasks.MobileFullScreenName}
+                    className="txtSearch"
+                    value={tasks.LieuDepart}
+                  />
+                ) : (
+                  <Form.Control
+                    nom="Depart"
+                    placeholder={tasks.MobileFullScreenName}
+                    className="txtSearch"
+                    value={tasks.LieuDepart}
+                  />
+                )
+              }
             </Form.Group>
             <Form.Group
               className="px-0 col-12 col-md-4 col-lg-3"
@@ -109,22 +139,29 @@ export default function Content() {
                 handleHeaderfooterChange("Destination", "formDestinationId");
               }}
             >
-              {autocompletCity === "formDestinationId" ? (
-                <SearchLocationInput
-                  nom="Destination"
-                  onChange={() => null}
-                  placeholder={tasks.MobileFullScreenName}
-                  className="txtSearch"
-                  value={tasks.LieuDestination}
-                />
-              ) : (
-                <Form.Control
-                  nom="Destination"
-                  placeholder={tasks.MobileFullScreenName}
-                  className="txtSearch"
-                  value={tasks.LieuDestination}
-                />
-              )}
+              {
+                /* Si autocompletCity est différent de null, cela veut dire que l'utilisateur à cliqué sur un input autocomplete.
+                Le but étant de mettre uniquement le input qui vient d'être cliqué en autocomplete (composant SearchLocationInput) 
+                L'élément cliqué devient un SearchLocationInput et l'autre un input normal.
+                */
+
+                autocompletCity === "formDestinationId" ? (
+                  <SearchLocationInput
+                    nom="Destination"
+                    onChange={() => null}
+                    placeholder={tasks.MobileFullScreenName}
+                    className="txtSearch"
+                    value={tasks.LieuDestination}
+                  />
+                ) : (
+                  <Form.Control
+                    nom="Destination"
+                    placeholder={tasks.MobileFullScreenName}
+                    className="txtSearch"
+                    value={tasks.LieuDestination}
+                  />
+                )
+              }
             </Form.Group>
             <Form.Group
               className="px-0 col-12 col-md-2 col-lg-2"
