@@ -15,7 +15,9 @@ const root = createRoot(container);
 root.render(
   <Provider store={store}>
     <Router>
-      <App />
+      <ResultatRecherche />
     </Router>
   </Provider>
 );
+
+//A faire : pouvoir faire une recherche en utilisant les données saisies dans le formulaire par le client
