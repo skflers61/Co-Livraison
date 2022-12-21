@@ -10,8 +10,10 @@ import {
   changeMobileFullScreenName,
   toggleWithHeaderFooter
 } from "../redux-slices/vue";
+import { Field, reduxForm } from "redux-form";
 
-export default function Content() {
+let ContactForm = (props) => {
+  const { handleSubmit } = props;
   /* hook d'état permettant de gérer la valeur du input date*/
   const [startDate, setStartDate] = useState(new Date());
 
@@ -99,7 +101,7 @@ export default function Content() {
         className={tasks.withHeaderFooter === false ? "DpNone" : ""}
       >
         {/*<div className="imgAccueil"></div>*/}
-        <Form className="formAccueil">
+        <Form onSubmit={handleSubmit} className="formAccueil">
           <Row className="justify-content-center px-5 px-lg-0">
             <Form.Group
               className="px-0 col-12 col-md-4 col-lg-3 "
@@ -187,4 +189,11 @@ export default function Content() {
       </Container>
     </div>
   );
-}
+};
+
+ContactForm = reduxForm({
+  // a unique name for the form
+  form: "contact"
+})(ContactForm);
+
+export default ContactForm;
